@@ -1,0 +1,14 @@
+{
+  "name": "guildmanager-backend",
+  "version": "0.1.0",
+  "description": "backend for the Guildmanager Website and Bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo no tests yet"
+  },
+  "author": "mxfrxsx",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

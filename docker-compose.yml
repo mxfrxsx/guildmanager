@@ -1,0 +1,44 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "3000:3000"
+    env_file: ./backend/.env
+    volumes:
+      - ./backend:/app
+    #depends_on:
+      #- db
+
+  bot:
+    build: ./bot
+    env_file: ./bot/.env
+    volumes:
+      - ./bot:/app
+    depends_on:
+      - backend
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+
+  db:
+    image: postgres
+    restart: always
+    env_file:
+      - ./db/.env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - backend
+
+volumes:
+  pgdata:
