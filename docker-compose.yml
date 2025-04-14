@@ -9,7 +9,7 @@ services:
     #depends_on:
       #- db
 
-  bot:
+  npbot:
     build: ./bot
     env_file: ./bot/.env
     volumes:
@@ -19,10 +19,11 @@ services:
 
   frontend:
     build: ./frontend
+    container_name: guildmanager-frontend
     ports:
-      - "5173:5173"
-    volumes:
-      - ./frontend:/app
+      - "3000:80"   # außen:3000 → container:80 (nginx)
+    restart: unless-stopped
+
 
   db:
     image: postgres
